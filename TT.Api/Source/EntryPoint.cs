@@ -1,5 +1,5 @@
-using TT;
-using TT.Interfaces;
+using TT.Application;
+using TT.Core.Interfaces;
 
 internal static class EntryPoint
 {
