@@ -9,13 +9,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\TT.Types\TT.Types.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.12" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\TT.Core\TT.Core.csproj" />
+	  <ProjectReference Include="..\TT.DataAccessLayer\TT.DataAccessLayer.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
