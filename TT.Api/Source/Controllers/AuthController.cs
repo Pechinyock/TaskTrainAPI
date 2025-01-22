@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using TT.Models.Authentication;
 using TT.Security;
+using TT.Models.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TT.Source.Controllers;
 
@@ -25,22 +26,32 @@ public class AuthController : ControllerBase
     #endregion
 
     [HttpGet]
-    public TokentModel GetTokent([Required] string userName, [Required] string password) 
+    public ActionResult<TokentModel> GetToken([Required] string userName, [Required] string password) 
     {
         var user = _users.FirstOrDefault(x => x.UserName == userName && x.Password == password);
         if (user == default)
-        {
-            return null;
-        }
+            return NotFound();
+
         var myClaims = new List<Claim>() { new Claim(ClaimTypes.Name, userName) };
-        var authOptions = Authentication.Options;
+        var authOptions = Authentication.GetAuthOptions();
+        var signingCreds = new SigningCredentials(Authentication.GetSymmetricKey(authOptions.Key), SecurityAlgorithms.HmacSha256);
         var jwt = new JwtSecurityToken(issuer: authOptions.Issuer
             , audience: authOptions.Audience
             , claims: myClaims
             , expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(authOptions.Lifetime))
-            , signingCredentials: new SigningCredentials(Authentication.GetSymmetricKey(authOptions.Key), SecurityAlgorithms.HmacSha256)
+            , signingCredentials: signingCreds
         );
 
         return new TokentModel() { AccessToken = new JwtSecurityTokenHandler().WriteToken(jwt) };
+    }
+
+    [HttpGet]
+    [Authorize]
+    public ActionResult<int> GetMeInt(int lucky) 
+    {
+        if (lucky == 10)
+            return NotFound();
+
+        return 20;
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using TT.Models.Authentication;
+using TT.Security;
 
 namespace TT.ExtensionMethods;
 
@@ -32,5 +33,7 @@ public static class SerivceConfigureExtensions
                         ValidateLifetime = true,
                     };
                 });
+
+        Authentication.SetAuthOptions(authConfig);
     }
 }
