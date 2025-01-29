@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TT.Api", "TT.Api\TT.Api.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TT.DataAccessLayer", "TT.DataAccessLayer\TT.DataAccessLayer.csproj", "{97A090BF-9937-4DDD-A106-8FA0C510F373}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TT.Core", "TT.Core\TT.Core.csproj", "{81A0DD76-EAEA-4B0E-89DE-02735FCE8B6D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{97A090BF-9937-4DDD-A106-8FA0C510F373}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97A090BF-9937-4DDD-A106-8FA0C510F373}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97A090BF-9937-4DDD-A106-8FA0C510F373}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81A0DD76-EAEA-4B0E-89DE-02735FCE8B6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81A0DD76-EAEA-4B0E-89DE-02735FCE8B6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81A0DD76-EAEA-4B0E-89DE-02735FCE8B6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81A0DD76-EAEA-4B0E-89DE-02735FCE8B6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

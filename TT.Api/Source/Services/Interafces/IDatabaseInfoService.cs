@@ -2,5 +2,5 @@
 
 public interface IDatabaseInfoService
 {
-    string GetDatabaseName();
+    string GetDatabaseVendorName();
 }

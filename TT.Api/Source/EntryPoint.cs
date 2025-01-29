@@ -1,9 +1,9 @@
+using TT.Core;
 using TT.Application;
-using TT.Core.Interfaces;
 
 internal static class EntryPoint
 {
-    private static IApplication _taskTrainApp = new TaskTrainAppliction();
+    private static ITTApp _taskTrainApp = new TaskTrainAppliction();
 
     public static void Main(string[] args)
     {

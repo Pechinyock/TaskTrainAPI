@@ -1,8 +1,9 @@
 ﻿using Npgsql;
+using TT.Core;
 
 namespace TT.DataAccessLayer.DataProviders;
 
-public class NpgSQLDataProvider
+public class NpgSQLDataProvider : IStorageProvider
 {
     private readonly string _connetionString;
 
@@ -41,4 +42,8 @@ public class NpgSQLDataProvider
             return String.Empty;
         }
     }
+
+    public string GetDatabaseVendorName() => "Postgres";
+
+    StroageTypeFlags IStorageProvider.GetType() => StroageTypeFlags.SqlDatabase | StroageTypeFlags.Remote;
 }

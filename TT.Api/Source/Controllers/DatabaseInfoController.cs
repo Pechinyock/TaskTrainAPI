@@ -11,12 +11,12 @@ public class DatabaseInfoController
 
     public DatabaseInfoController(IDatabaseInfoService databaseInfoService)
     {
-      _databaseInfoService = databaseInfoService;
+        _databaseInfoService = databaseInfoService;
     }
 
     [HttpGet]
-    public string GetCurrectDbName() 
+    public string GetDatabaseVendorName()
     {
-        return _databaseInfoService.GetDatabaseName();
+        return _databaseInfoService.GetDatabaseVendorName();
     }
 }

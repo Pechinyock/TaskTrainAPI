@@ -1,13 +1,13 @@
 ﻿using Microsoft.OpenApi.Models;
+using TT.Core;
 using TT.ExtensionMethods;
-using TT.Core.Interfaces;
 using TT.Models.Authentication;
 using TT.Services.Interafces;
 using TT.Services;
 
 namespace TT.Application;
 
-public class TaskTrainAppliction : IApplication
+public class TaskTrainAppliction : ITTApp
 {
     #region Startup initializer
     private class Initialize
@@ -42,7 +42,6 @@ public class TaskTrainAppliction : IApplication
             services.AddJwt(_authOptions);
             services.AddControllers();
             services.AddSwaggerGen();
-
             /* [TODO] to extensiont method */
             services.AddTransient<IDatabaseInfoService, DatabaseInfoService>();
             services.Configure<DatabaseInfoOptions>(options => 
