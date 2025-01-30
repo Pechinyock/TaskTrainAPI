@@ -105,7 +105,7 @@ public class TaskTrainAppliction : ITTApp
             {
                 webBuilder.UseStartup<Initialize>()
                     .UseKestrel(options => { })
-                    .UseUrls("http://*:5000");
+                    .UseUrls("http://*:5001");
             });
         _app = builder.Build();
     }
