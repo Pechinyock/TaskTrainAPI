@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
 using TT.Core;
 using TT.DataAccessLayer.DataProviders;
-using TT.Services.Interafces;
 
-namespace TT.Services;
+namespace TT.Api.Services;
 
 public class DatabaseInfoOptions
 {

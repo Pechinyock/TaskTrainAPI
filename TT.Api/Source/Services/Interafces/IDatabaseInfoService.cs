@@ -1,4 +1,4 @@
-﻿namespace TT.Services.Interafces;
+﻿namespace TT.Api.Services;
 
 public interface IDatabaseInfoService
 {

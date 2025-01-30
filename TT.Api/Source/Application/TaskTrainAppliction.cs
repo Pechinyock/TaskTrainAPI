@@ -1,11 +1,6 @@
-﻿using Microsoft.OpenApi.Models;
-using TT.Core;
-using TT.ExtensionMethods;
-using TT.Models.Authentication;
-using TT.Services.Interafces;
-using TT.Services;
+﻿using TT.Core;
 
-namespace TT.Application;
+namespace TT.Api;
 
 public class TaskTrainAppliction : ITTApp
 {
@@ -14,7 +9,6 @@ public class TaskTrainAppliction : ITTApp
     {
         public IConfiguration Configuration { get; }
 
-        private readonly AuthOptionsModel _authOptions;
         private readonly string _pgConnection;
 
         public Initialize(IHostEnvironment env)
@@ -24,59 +18,15 @@ public class TaskTrainAppliction : ITTApp
                 .AddJsonFile($"Config/appsettings.{env.EnvironmentName}.json")
                 .Build();
 
-            _authOptions = new AuthOptionsModel()
-            {
-                Issuer = Configuration["Jwt:Issuer"],
-                Audience = Configuration["Jwt:Audience"],
-                Key = Configuration["Jwt:Key"],
-                Lifetime = UInt32.Parse(Configuration["Jwt:Lifetime"])
-            };
-
-            /* [TODO] Validate */
             _pgConnection = Configuration["Storage:PostgreSQL:Connectionstring"];
-
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddJwt(_authOptions);
+            services.AddJwtAuth();
             services.AddControllers();
-            services.AddSwaggerGen();
-            /* [TODO] to extensiont method */
-            services.AddTransient<IDatabaseInfoService, DatabaseInfoService>();
-            services.Configure<DatabaseInfoOptions>(options => 
-            {
-                options.ConnectionString = _pgConnection;
-            });
-            services.AddSwaggerGen(options => 
-            {
-                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
-                {
-                    Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
-                      Enter 'Bearer' [space] and then your token in the text input below.
-                      \r\n\r\nExample: 'Bearer 12345abcdef'",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer",
-                    BearerFormat = "JWT",
-                });
-
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement()
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        },
-                    },
-                    new List<string>()
-                }
-                });
-            });
+            services.AddSwaggerGenAuth();
+            services.AddDbInfoService(_pgConnection);
         }
 
         public void Configure(IApplicationBuilder builder, IWebHostEnvironment env)
@@ -90,6 +40,7 @@ public class TaskTrainAppliction : ITTApp
             {
                 endpoints.MapControllers();
             });
+
             builder.UseSwagger();
             builder.UseSwaggerUI();
         }
@@ -110,8 +61,6 @@ public class TaskTrainAppliction : ITTApp
         _app = builder.Build();
     }
 
-    public void Run()
-    {
-        _app.Run();
-    }
+    public void Run() => _app.Run();
+    
 }

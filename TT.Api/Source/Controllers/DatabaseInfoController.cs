@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TT.Services.Interafces;
+using Microsoft.AspNetCore.Authorization;
+using TT.Api.Services;
 
-namespace TT.Source.Controllers;
+namespace TT.Api.Controllers;
 
 [ApiController]
 [Route("[controller]/[action]")]
-public class DatabaseInfoController
+public class DatabaseInfoController : ControllerBase
 {
     private readonly IDatabaseInfoService _databaseInfoService;
 
@@ -18,5 +19,12 @@ public class DatabaseInfoController
     public string GetDatabaseVendorName()
     {
         return _databaseInfoService.GetDatabaseVendorName();
+    }
+
+    [HttpGet]
+    [Authorize]
+    public string GetDatabaseVersion() 
+    {
+        return "sdf";
     }
 }
