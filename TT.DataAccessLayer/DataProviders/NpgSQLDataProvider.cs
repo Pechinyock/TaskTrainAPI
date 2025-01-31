@@ -45,5 +45,10 @@ public class NpgSQLDataProvider : IStorageProvider
 
     public string GetDatabaseVendorName() => "Postgres";
 
+    public string GetDefautDatabaseName()
+    {
+        throw new NotImplementedException();
+    }
+
     StroageTypeFlags IStorageProvider.GetType() => StroageTypeFlags.SqlDatabase | StroageTypeFlags.Remote;
 }
