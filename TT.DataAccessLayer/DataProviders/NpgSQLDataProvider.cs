@@ -1,9 +1,9 @@
 ﻿using Npgsql;
-using TT.Core;
+using TT.Stroage;
 
 namespace TT.DataAccessLayer.DataProviders;
 
-public class NpgSQLDataProvider : IStorageProvider
+public class NpgSQLDataProvider : ISQLDataProvider
 {
     private readonly string _connetionString;
 
@@ -50,5 +50,4 @@ public class NpgSQLDataProvider : IStorageProvider
         throw new NotImplementedException();
     }
 
-    public StroageTypeFlags GetStorageType() => StroageTypeFlags.SqlDatabase | StroageTypeFlags.Remote;
 }

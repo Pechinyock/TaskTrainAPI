@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using TT.Core;
 using TT.DataAccessLayer.DataProviders;
 
 namespace TT.Api.Services;
@@ -15,7 +14,6 @@ public class DatabaseInfoService : IDatabaseInfoService
 
     private readonly string _connectionString;
 
-    private readonly IStorageProvider _storageProvider;
 
     public DatabaseInfoService(IOptions<DatabaseInfoOptions> options)
     {
@@ -27,11 +25,12 @@ public class DatabaseInfoService : IDatabaseInfoService
         Config = options.Value;
 
         _connectionString = options.Value.ConnectionString;
-        _storageProvider = new NpgSQLDataProvider(_connectionString);
+//        _storageProvider = new NpgSQLDataProvider(_connectionString);
     }
 
     public string GetDatabaseVendorName()
     {
-        return _storageProvider.GetDatabaseVendorName();
+        throw new NotImplementedException();
+  //      return _storageProvider.GetDatabaseVendorName();
     }
 }
