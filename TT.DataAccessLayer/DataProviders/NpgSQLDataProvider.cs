@@ -50,5 +50,5 @@ public class NpgSQLDataProvider : IStorageProvider
         throw new NotImplementedException();
     }
 
-    StroageTypeFlags IStorageProvider.GetType() => StroageTypeFlags.SqlDatabase | StroageTypeFlags.Remote;
+    public StroageTypeFlags GetStorageType() => StroageTypeFlags.SqlDatabase | StroageTypeFlags.Remote;
 }
